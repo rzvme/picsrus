@@ -32,7 +32,7 @@ spec:
       - name: picsrusctn
         image: thorgate.local:5000/cv:latest
         ports:
-        - containerPort: 3000
+        - containerPort: 4000
         resources:
           requests:
             memory: "128Mi"
@@ -58,8 +58,8 @@ spec:
     app: picsrus
   ports:
   - protocol: TCP
-    port: 3000
-    targetPort: 3000
+    port: 4000
+    targetPort: 4000
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -79,4 +79,4 @@ spec:
           service:
             name: picsrus
             port:
-              number: 3000
+              number: 4000
