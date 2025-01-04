@@ -1,0 +1,82 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: local-path-pvc
+  namespace: picsrus
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 300Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: picsrus
+  namespace: picsrus
+  labels:
+    app: picsrus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: picsrus
+  template:
+    metadata:
+      labels:
+        app: picsrus
+    spec:
+      containers:
+      - name: picsrusctn
+        image: thorgate.local:5000/cv:latest
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        volumeMounts:
+        - name: volv
+          mountPath: /data
+      volumes:
+      - name: volv
+        persistentVolumeClaim:
+          claimName: local-path-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: picsrus
+  namespace: picsrus
+spec:
+  selector:
+    app: picsrus
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: picsrus-ingress
+  namespace: picsrus
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: razvanvalentingrigoras.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: picsrus
+            port:
+              number: 3000
