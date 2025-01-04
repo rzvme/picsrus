@@ -56,9 +56,9 @@ metadata:
 spec:
   selector:
     app: picsrus
+  type: LoadBalancer
   ports:
-  - protocol: TCP
-    port: 4000
+  - port: 4000
     targetPort: 4000
 ---
 apiVersion: networking.k8s.io/v1
