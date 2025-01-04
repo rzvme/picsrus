@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - name: picsrusctn
-        image: thorgate.local:5000/cv:latest
+        image: thorgate.local:5000/picsrus:latest
         ports:
         - containerPort: 4000
         resources:
