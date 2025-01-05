@@ -35,12 +35,13 @@
       // Automatically change slide every 7 seconds
         setInterval(() => {
             showSlide(currentSlide + 1);
-          }, 7000);
+          }, 17000);
 
         // Change slide on keydown event
       document.addEventListener('keydown', (event) => {
         if (event.key === 'ArrowLeft') {
           showSlide(currentSlide - 1); // Previous slide
+          return;
         }
         showSlide(currentSlide + 1);
   });
