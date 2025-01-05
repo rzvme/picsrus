@@ -23,7 +23,29 @@
             <img src="/uploads/<%= image %>" class="slide" style="display: <%= index === 0 ? 'block' : 'none' %>;">
             <% }); %>
     </div>
-    <script>    const slides = document.querySelectorAll('.slide'); let currentSlide = 0; setInterval(() => { slides[currentSlide].style.display = 'none'; currentSlide = (currentSlide + 1) % slides.length; slides[currentSlide].style.display = 'block'; }, 17000);   </script>
+    <script>    
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        const showSlide = (index) => {
+            slides[currentSlide].style.display = 'none';
+            currentSlide = (index + slides.length) % slides.length;
+            slides[currentSlide].style.display = 'block';
+          };
+
+      // Automatically change slide every 7 seconds
+        setInterval(() => {
+            showSlide(currentSlide + 1);
+          }, 7000);
+
+        // Change slide on keydown event
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft') {
+          showSlide(currentSlide - 1); // Previous slide
+        }
+        showSlide(currentSlide + 1);
+  });
+</script>
 
 </body>
 
