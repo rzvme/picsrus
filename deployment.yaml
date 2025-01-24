@@ -4,6 +4,7 @@ metadata:
   name: local-path-pvc
   namespace: picsrus
 spec:
+  persistentVolumeReclaimPolicy: Retain
   accessModes:
     - ReadWriteOnce
   storageClassName: local-path
