@@ -47,7 +47,7 @@ app.post('/upload', upload.array('photos', 10000), (req, res) => {
 });
 
 app.get('/view', (req, res) => {
-    const uploadsDir = '/data');
+    const uploadsDir = '/data';
     fs.readdir(uploadsDir, (err, files) => {
         if (err) {
             return res.status(500).send('Unable to scan uploads directory.');
