@@ -8,7 +8,7 @@ const PORT = 4000;
 
 // Set storage engine for multer
 const storage = multer.diskStorage({
-    destination: '/mnt/data', // Use persistent volume mount path
+    destination: '/data', // Use persistent volume mount path
     filename: (req, file, cb) => {
         cb(null, `${Date.now()}-${file.originalname}`);
     },
@@ -47,7 +47,7 @@ app.post('/upload', upload.array('photos', 10000), (req, res) => {
 });
 
 app.get('/view', (req, res) => {
-    const uploadsDir = '/mnt/data');
+    const uploadsDir = '/data');
     fs.readdir(uploadsDir, (err, files) => {
         if (err) {
             return res.status(500).send('Unable to scan uploads directory.');
