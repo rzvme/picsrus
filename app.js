@@ -30,7 +30,7 @@ const upload = multer({
 });
 
 // Middleware
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/data', express.static('/data'));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
