@@ -101,7 +101,7 @@ metadata:
     kubernetes.io/ingress.class: nginx
 spec:
   rules:
-  - host: razvanvalentingrigoras.com
+  - host: picsrus.com
     http:
       paths:
       - path: /
