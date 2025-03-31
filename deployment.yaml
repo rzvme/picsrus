@@ -101,7 +101,7 @@ metadata:
     kubernetes.io/ingress.class: nginx
 spec:
   rules:
-  - host: picsrus.com
+  - host: guildhub.eu
     http:
       paths:
       - path: /
